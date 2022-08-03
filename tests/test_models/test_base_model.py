@@ -41,6 +41,11 @@ class BaseModelTest(unittest.TestCase):
         model_dict = my_model.to_dict()
         new_model = BaseModel(**model_dict)
         self.assertEqual(new_model.to_dict(), my_model.to_dict())
+        self.assertIn('__class__', new_model.to_dict())
+        class_type = "<class 'datetime.datetime'>"
+        self.assertEqual(str(type(new_model.created_at)), class_type)
+        self.assertEqual(str(type(new_model.updated_at)), class_type)
+        self.assertIsNot(my_model, new_model)
 
 
 if __name__ == '__main__':
