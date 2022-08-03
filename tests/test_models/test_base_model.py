@@ -42,6 +42,7 @@ class BaseModelTest(unittest.TestCase):
         new_model = BaseModel(**model_dict)
         self.assertEqual(new_model.to_dict(), my_model.to_dict())
         self.assertIn('__class__', new_model.to_dict())
+        self.assertNotIn('__class__', new_model.__dict__)
         class_type = "<class 'datetime.datetime'>"
         self.assertEqual(str(type(new_model.created_at)), class_type)
         self.assertEqual(str(type(new_model.updated_at)), class_type)
