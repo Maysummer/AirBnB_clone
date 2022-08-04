@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """Module that defines the class FileStorage"""
 import json
-#from ..base_model import BaseModel
 
 
 class FileStorage:
@@ -33,11 +32,12 @@ class FileStorage:
 
     def reload(self):
         """deserializes the JSON file to __objects"""
+        from ..base_model import BaseModel
         try:
             with open(self.__file_path, 'r', encoding='UTF-8') as f:
                 self.__objects = json.load(f)
-            '''for key in self.__objects.keys():
+            for key in self.__objects.keys():
                 value = self.__objects[key]
-                self.__objects[key] = BaseModel(**value)'''
+                self.__objects[key] = BaseModel(**value)
         except Exception:
             pass
