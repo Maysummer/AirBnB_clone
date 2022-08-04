@@ -13,15 +13,22 @@ class HBNBCommand(cmd.Cmd):
         """
         return True
 
+    def do_EOF(self, arg):
+        """Quit command to exit the program
+        """
+        # print is so that ctrl+d leaves a new line
+        print()
+        return True
+
     def emptyline(self):
         """do nothing if ENTER is pressed"""
         return False
 
-    def default(self, line):
+    '''def default(self, line):
         """exit the program"""
         if line == 'EOF':
             return True
-        return super().default(line)
+        return super().default(line)'''
 
     """def do_help(self, arg):
         print(arg)"""
