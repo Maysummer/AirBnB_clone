@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Module that defines the class FileStorage"""
 import json
-from ..base_model import BaseModel
+#from ..base_model import BaseModel
 
 
 class FileStorage:
@@ -18,7 +18,7 @@ class FileStorage:
     def new(self, obj):
         """sets in __objects the obj with key
         <obj class name>.id"""
-        if isinstance(obj, BaseModel):
+        if obj is not None:
             value = obj.to_dict()
             key = f"{value['__class__']}.{obj.id}"
             self.__objects[key] = obj
@@ -36,8 +36,8 @@ class FileStorage:
         try:
             with open(self.__file_path, 'r', encoding='UTF-8') as f:
                 self.__objects = json.load(f)
-            for key in self.__objects.keys():
+            '''for key in self.__objects.keys():
                 value = self.__objects[key]
-                self.__objects[key] = BaseModel(**value)
+                self.__objects[key] = BaseModel(**value)'''
         except Exception:
             pass
