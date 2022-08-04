@@ -2,6 +2,8 @@
 """program that contains the entry point of the command interpreter"""
 
 import cmd
+from models.base_model import BaseModel
+from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -24,14 +26,17 @@ class HBNBCommand(cmd.Cmd):
         """do nothing if ENTER is pressed"""
         return False
 
-    '''def default(self, line):
-        """exit the program"""
-        if line == 'EOF':
-            return True
-        return super().default(line)'''
-
-    """def do_help(self, arg):
-        print(arg)"""
+    def do_create(self, arg):
+        """Creates a new instance of BaseModel, saves it (to the JSON file)
+        and prints the id"""
+        if arg == "":
+            print("** class name missing **")
+        elif arg != "BaseModel":
+            print("** class doesn't exist **")
+        else:
+            base = BaseModel()
+            base.save()
+            print(base.id)
 
 
 if __name__ == '__main__':
