@@ -64,6 +64,40 @@ class HBNBCommand(cmd.Cmd):
                     lis_str.append(str(storage.all()[key]))
             print(lis_str)
 
+    def do_update(self, arg):
+        """
+        Updates an instance based on the class name and
+        id by adding or updating attribute (save the change
+        into the JSON file). Ex: $ update
+        BaseModel 1234-1234-1234 email 'aibnb@mail.com'
+        """
+        if self.verify_arg(arg, True):
+            word = arg.split(' ')
+            if len(word) < 3:
+                print('** attribute name missing **')
+            elif len(word) < 4:
+                print('** value missing **')
+            else:
+                val = f"{word[0]}.{word[1]}"
+                obj = storage.all()[val]
+                attr = word[2]
+                if attr not in ['id', 'created_at',
+                                'updated_at']:
+                    value = word[3]
+                    if value.startswith('"'):
+                        x = 3
+                        for i in range(x, len(word)):
+                            if word[i].endswith('"'):
+                                x = i + 1
+                                break
+                        value = ' '.join(word[3:x])
+                        value = value[1:-1]
+                    if attr in obj.__dict__:
+                        typ = type(obj.__dict__)
+                        value = typ(value)
+                    obj.__dict__[attr] = value
+                    storage.save()
+
     def verify_arg(self, arg, idCheck):
         """Checks that arg to a command is correct"""
         if arg == "":
