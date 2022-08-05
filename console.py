@@ -16,11 +16,13 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, arg):
-        """Quit command to exit the program
+        """Type Ctrl+D to exit the program
         """
         # print is so that ctrl+d leaves a new line
-        print()
-        return True
+        # this method won't be called when ctrl+d is pressed
+        # rather when the string EOF is entered
+        print('*** Unknown syntax: EOF')
+        return False
 
     def emptyline(self):
         """do nothing if ENTER is pressed"""
