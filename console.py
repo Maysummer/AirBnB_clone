@@ -16,7 +16,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, arg):
-        """Quit command to exit the program
+        """Enter Ctrl+D to exit the program
         """
         # print is so that ctrl+d leaves a new line
         print()
