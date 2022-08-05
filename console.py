@@ -29,11 +29,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it (to the JSON file)
         and prints the id"""
-        if arg == "":
-            print("** class name missing **")
-        elif arg != "BaseModel":
-            print("** class doesn't exist **")
-        else:
+        if self.verify_arg(arg, False):
             base = BaseModel()
             base.save()
             print(base.id)
@@ -41,21 +37,26 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         """Prints the string representation of an instance based on
         the class name and id"""
-        if arg == "":
-            print("** class name missing **")
-        else:
-            word = arg.split(' ')
-            if word[0] != "BaseModel":
-                print("** class doesn't exist **")
-            elif len(word) < 2:
-                print("** instance id missing **")
-            else:
+        if self.verify_arg(arg, True):
                 val = f"{word[0]}.{word[1]}"
                 if val not in storage.all():
                     print("** no instance found **")
                 else:
                     print(storage.all()[val])
 
+    def verify_arg(self, arg, idCheck):
+        """Checks that arg to a command is correct"""
+        if arg == "":
+            print("** class name missing **")
+            return False
+        word = arg.split(' ')
+        if word[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return False
+        if idCheck and len(word) < 2:
+            print("** instance id missing **")
+            return False
+        return True
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
