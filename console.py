@@ -43,13 +43,26 @@ class HBNBCommand(cmd.Cmd):
             print(storage.all()[val])
 
     def do_destroy(self, arg):
-        """Deletes an instance based on the class name and id"""
+        """
+        Deletes an instance based on the class name and id
+        """
         if self.verify_arg(arg, True):
             word = arg.split(' ')
             val = f"{word[0]}.{word[1]}"
             del storage.all()[val]
             storage.save()
 
+    def do_all(self, arg):
+        """
+        Prints all string representation
+        of all instances based or not on the class name
+        """
+        if arg == '' or self.verify_arg(arg, False):
+            lis_str = []
+            for key in storage.all().keys():
+                if arg == '' or key.startswith(arg):
+                    lis_str.append(str(storage.all()[key]))
+            print(lis_str)
 
     def verify_arg(self, arg, idCheck):
         """Checks that arg to a command is correct"""
@@ -57,7 +70,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return False
         word = arg.split(' ')
-        if word[0] != "BaseModel":
+        if word[0] not in ['BaseModel']:
             print("** class doesn't exist **")
             return False
         if idCheck:
@@ -69,6 +82,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
                 return False
         return True
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
