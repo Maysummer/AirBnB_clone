@@ -3,6 +3,7 @@
 
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 
@@ -30,7 +31,11 @@ class HBNBCommand(cmd.Cmd):
         """Creates a new instance of BaseModel, saves it (to the JSON file)
         and prints the id"""
         if self.verify_arg(arg, False):
-            base = BaseModel()
+            base = ''
+            if 'User' in arg:
+                base = User()
+            else:
+                base = BaseModel()
             base.save()
             print(base.id)
 
@@ -104,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return False
         word = arg.split(' ')
-        if word[0] not in ['BaseModel']:
+        if word[0] not in ['BaseModel', 'User']:
             print("** class doesn't exist **")
             return False
         if idCheck:
