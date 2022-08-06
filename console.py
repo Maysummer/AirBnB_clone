@@ -24,7 +24,6 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, arg):
         """Enter Ctrl+D to exit the program
         """
-        # print is so that ctrl+d leaves a new line
         print()
         return True
 
@@ -113,10 +112,13 @@ class HBNBCommand(cmd.Cmd):
                         value = ' '.join(word[3:x])
                         value = value[1:-1]
                     if attr in type(obj).__dict__:
-                        typ = type(type(obj).__dict__[attr])
-                        value = typ(value)
-                        obj.__dict__[attr] = value
-                        storage.save()
+                        try:
+                            typ = type(type(obj).__dict__[attr])
+                            value = typ(value)
+                            obj.__dict__[attr] = value
+                            storage.save()
+                        except Exception:
+                            return False
 
     def verify_arg(self, arg, idCheck):
         """Checks that arg to a command is correct"""
