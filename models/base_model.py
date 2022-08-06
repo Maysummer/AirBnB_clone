@@ -3,7 +3,8 @@
 import uuid
 from datetime import datetime
 from . import storage
-#storage = models.storage
+
+
 class BaseModel:
     """This class  defines all common attributes/methods
     for other classes"""
@@ -26,7 +27,7 @@ class BaseModel:
     def __str__(self):
         """string representation of an instance of
         BaseModel"""
-        return f"[BaseModel] ({self.id}) {self.__dict__}"
+        return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """saves this instance of the BaseModel"""
@@ -37,7 +38,7 @@ class BaseModel:
         """Dictionary representation of an instance of
         BaseModel"""
         dict_rep = {**self.__dict__}
-        dict_rep['__class__'] = 'BaseModel'
+        dict_rep['__class__'] = type(self).__name__
         dict_rep['created_at'] = self.created_at.isoformat()
         dict_rep['updated_at'] = self.updated_at.isoformat()
         return dict_rep

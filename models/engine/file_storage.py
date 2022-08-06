@@ -24,20 +24,40 @@ class FileStorage:
 
     def save(self):
         """serializes __objects to the JSON file"""
+        dict_save = {}
         for key in self.__objects.keys():
             value = self.__objects[key].to_dict()
-            self.__objects[key] = value
+            dict_save[key] = value
         with open(self.__file_path, 'w', encoding='UTF-8') as f:
-            json.dump(self.__objects, f)
+            json.dump(dict_save, f)
 
     def reload(self):
         """deserializes the JSON file to __objects"""
         from ..base_model import BaseModel
+        from ..user import User
+        from ..place import Place
+        from ..state import State
+        from ..city import City
+        from ..amenity import Amenity
+        from ..review import Review
         try:
             with open(self.__file_path, 'r', encoding='UTF-8') as f:
                 self.__objects = json.load(f)
             for key in self.__objects.keys():
                 value = self.__objects[key]
-                self.__objects[key] = BaseModel(**value)
+                if key.startswith('Place'):
+                    self.__objects[key] = Place(**value)
+                elif key.startswith('User'):
+                    self.__objects[key] = User(**value)
+                elif key.startswith('State'):
+                    self.__objects[key] = State(**value)
+                elif key.startswith('City'):
+                    self.__objects[key] = City(**value)
+                elif key.startswith('Amenity'):
+                    self.__objects[key] = Amenity(**value)
+                elif key.startswith('Review'):
+                    self.__objects[key] = Review(**value)
+                elif key.startswith('BaseModel'):
+                    self.__objects[key] = BaseModel(**value)
         except Exception:
             pass
