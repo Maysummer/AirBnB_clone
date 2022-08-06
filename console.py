@@ -4,6 +4,11 @@
 import cmd
 from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 from models import storage
 
 
@@ -34,6 +39,16 @@ class HBNBCommand(cmd.Cmd):
             base = ''
             if 'User' in arg:
                 base = User()
+            elif 'Place' in arg:
+                base = Place()
+            elif 'State' in arg:
+                base = State()
+            elif 'City' in arg:
+                base = City()
+            elif 'Amenity' in arg:
+                base = Amenity()
+            elif 'Review' in arg:
+                base = Review()
             else:
                 base = BaseModel()
             base.save()
@@ -97,11 +112,11 @@ class HBNBCommand(cmd.Cmd):
                                 break
                         value = ' '.join(word[3:x])
                         value = value[1:-1]
-                    if attr in obj.__dict__:
-                        typ = type(obj.__dict__)
+                    if attr in type(obj).__dict__:
+                        typ = type(type(obj).__dict__[attr])
                         value = typ(value)
-                    obj.__dict__[attr] = value
-                    storage.save()
+                        obj.__dict__[attr] = value
+                        storage.save()
 
     def verify_arg(self, arg, idCheck):
         """Checks that arg to a command is correct"""
@@ -109,7 +124,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return False
         word = arg.split(' ')
-        if word[0] not in ['BaseModel', 'User']:
+        if word[0] not in ['BaseModel', 'User', 'Place', 'State', 'City',
+                           'Amenity', 'Review']:
             print("** class doesn't exist **")
             return False
         if idCheck:
