@@ -44,5 +44,6 @@ class PlaceTest(unittest.TestCase):
         self.assertEqual(str(type(new_place.updated_at)), class_type)
         self.assertIsNot(my_place, new_place)
 
+
 if __name__ == '__main__':
     unittest.main()

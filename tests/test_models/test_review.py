@@ -43,5 +43,6 @@ class ReviewTest(unittest.TestCase):
         self.assertEqual(str(type(new_review.updated_at)), class_type)
         self.assertIsNot(my_review, new_review)
 
+
 if __name__ == '__main__':
     unittest.main()
