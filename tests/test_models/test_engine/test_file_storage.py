@@ -7,17 +7,21 @@ from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
-import models.user import User
+from models.user import User
 
 
 class FileStorageTest(unittest.TestCase):
     """File_storage test"""
-    def saveUser:
-        new_model = BaseModel()
-        new_model.name = "My_first"
-        new_model.save
-        all_obj = storage.all()
-        for obj in all_obj.keys():
-            del all_obj[obj]
-        all_obj = storage.all()
-        self.assertIsEqual(new_model, all_obj)
+
+    def test_saveModel(self):
+        model = BaseModel()
+        model.name = "My_first"
+        model.save()
+        storage.all().clear()
+        storage.reload()
+        new_model = storage.all()[f'BaseModel.{model.id}']
+        self.assertEqual(new_model.to_dict(), model.to_dict())
+
+
+if __name__ == '__main__':
+    unittest.main()
