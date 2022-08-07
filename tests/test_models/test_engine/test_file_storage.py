@@ -19,6 +19,5 @@ class FileStorageTest(unittest.TestCase):
         all_obj = storage.all()
         for obj in all_obj.keys():
             del all_obj[obj]
-
-        self.assertIsEqual(new_model,
-
+        all_obj = storage.all()
+        self.assertIsEqual(new_model, all_obj)
