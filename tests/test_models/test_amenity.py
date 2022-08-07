@@ -43,5 +43,6 @@ class AmenityTest(unittest.TestCase):
         self.assertEqual(str(type(new_amenity.updated_at)), class_type)
         self.assertIsNot(my_amenity, new_amenity)
 
+
 if __name__ == '__main__':
     unittest.main()

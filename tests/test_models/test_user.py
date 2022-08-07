@@ -12,7 +12,7 @@ class UserTest(unittest.TestCase):
         my_user = User()
         my_user.first_name = 'Nmesoma'
         my_user.last_name = 'Udojike'
-        my_user.email = 'udjyk@gmail.com'
+        my_user.email = 'udojyk@gmail.com'
         self.assertIsNotNone(my_user)
         class_type = "<class 'models.user.User'>"
         self.assertEqual(str(type(my_user)), class_type)
@@ -44,6 +44,7 @@ class UserTest(unittest.TestCase):
         self.assertEqual(str(type(new_user.created_at)), class_type)
         self.assertEqual(str(type(new_user.updated_at)), class_type)
         self.assertIsNot(my_user, new_user)
+
 
 if __name__ == '__main__':
     unittest.main()

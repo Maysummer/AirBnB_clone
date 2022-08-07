@@ -43,5 +43,6 @@ class StateTest(unittest.TestCase):
         self.assertEqual(str(type(new_state.updated_at)), class_type)
         self.assertIsNot(my_state, new_state)
 
+
 if __name__ == '__main__':
     unittest.main()
