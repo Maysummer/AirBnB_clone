@@ -140,6 +140,52 @@ class HBNBCommand(cmd.Cmd):
                 return False
         return True
 
+    def default(self, line):
+        """Method called to handle inputs that are not explicit
+        commands"""
+        if line.startswith('User.'):
+            self.handle_model(line, 'User')
+        elif line.startswith('BaseModel.'):
+            self.handle_model(line, 'BaseModel')
+        elif line.startswith('Place.'):
+            self.handle_model(line, 'Place')
+        elif line.startswith('Amenity.'):
+            self.handle_model(line, 'Amenity')
+        elif line.startswith('State.'):
+            self.handle_model(line, 'State')
+        elif line.startswith('City.'):
+            self.handle_model(line, 'City')
+        elif line.startswith('Review.'):
+            self.handle_model(line, 'Review')
+
+    def handle_model(self, line, modelName):
+        """This will handle model commands"""
+        spt = line.split('.')
+        mtd = spt[1]
+        if mtd == 'all()':
+            self.do_all(modelName)
+        elif mtd == 'count()':
+            count = 0
+            for key in storage.all().keys():
+                if key.startswith(modelName):
+                    count += 1
+            print(count)
+        elif mtd.startswith('show("') and mtd.endswith('")'):
+            id = mtd[6:-2]
+            arg = f'{modelName} {id}'
+            self.do_show(arg)
+        elif mtd.startswith('destroy("') and mtd.endswith('")'):
+            id = mtd[9:-2]
+            arg = f'{modelName} {id}'
+            self.do_destroy(arg)
+        elif mtd.startswith('update("') and mtd.endswith('")'):
+            args = mtd[8:-2].split('"')
+            arg = modelName
+            for i in args:
+                if not i.startswith(','):
+                    arg += ' ' + i
+            self.do_update(arg)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
