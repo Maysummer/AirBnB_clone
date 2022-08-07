@@ -7,12 +7,12 @@ from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
-import models.user import User
+from models.user import User
 
 
 class FileStorageTest(unittest.TestCase):
     """File_storage test"""
-    def saveUser:
+    def saveUser(sel):
         new_model = BaseModel()
         new_model.name = "My_first"
         new_model.save
