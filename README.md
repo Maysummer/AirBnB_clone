@@ -51,4 +51,12 @@ The __all__ command will retrieve the string representation of all the models in
 
 * all **classname** \
 This command will retrieve the string representation of all the models instances of type **classname** in the file storage \
-Example **all User** 
+Example **all User**
+
+* show **classname** __id__ \
+This command will retrieve the model of type **classname** with the given __id__\
+Example. **show BaseModel 8298diaoifyeoiufoar**
+
+* update **classname** __id__ __attribute name__ __attribute value__ \
+This command will update the **attribute name** of the model of type **classname** with the given __id__ and __attribute value__ \
+Example. **update User first_name "Ebube"**
