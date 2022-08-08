@@ -1,6 +1,6 @@
 # AirBnB clone - The console
 
-## Desciption of the project
+## Description of the project
 
 This is the first step towards building a first full web application: the AirBnB clone.
 The goal of the project is to deploy on your server a simple copy of the [AirBnB website](https://www.airbnb.com/).
