@@ -46,6 +46,16 @@ Class attributes will always be used for any object and not instance attributes 
 
 ## Commands
 
+* quit \
+The quit command will exit the program
+
+* EOF \
+The EOF command will exit the program
+
+* create **classname** \
+Creates a new instance of **classname**, saves it (to the JSON file) and prints the id
+Exampls **create BaseModel**
+
 * all \
 The __all__ command will retrieve the string representation of all the models in the file storage
 
@@ -56,6 +66,10 @@ Example **all User**
 * show **classname** __id__ \
 This command will retrieve the model of type **classname** with the given __id__\
 Example. **show BaseModel 8298diaoifyeoiufoar**
+
+* destroy **classname id** \
+Deletes an instance based on the class name and id (save the change into the JSON file)
+Example **destroy BseModel 1234-1234-1234**
 
 * update **classname** __id__ __attribute name__ __attribute value__ \
 This command will update the **attribute name** of the model of type **classname** with the given __id__ and __attribute value__ \
