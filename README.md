@@ -50,5 +50,5 @@ Class attributes will always be used for any object and not instance attributes 
 The __all__ command will retrieve the string representation of all the models in the file storage
 
 * all <classname> \
-This command will retrieve the string representation of all the models instances of type **<classname>** in the file storage \
+This command will retrieve the string representation of all the models instances of type **classname** in the file storage \
 Example **all User** 
