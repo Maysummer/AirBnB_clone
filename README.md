@@ -43,3 +43,8 @@ Class attributes will always be used for any object and not instance attributes 
 - Provides easy class description: everybody will be able to see quickly what a model should contain (which attributes, etc…)
 - Provides default value of any attribute
 - Provides the same model behavior for file storage or database storage
+
+## Commands
+
+* all
+The __all__ command will retrieve the string representation of all the models in the file storage
